@@ -1,0 +1,21 @@
+:root {
+    --bg-dark: #1f2029;
+    --fg-dark: #dcdcdc;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+
+}
+
+#book-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    background-color: var(--bg-dark);
+    min-height: max-content;
+}
