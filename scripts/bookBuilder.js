@@ -13,6 +13,13 @@ function addBookToShelf(title, author, pages, read) {
     bookshelf.push(new Book(title, author, pages, read));
 }
 
+addBookToShelf('The Hobbit', 'J.R.R. Tolkien', 669, false);
+addBookToShelf('Thrawn', 'Timothy Zahn', 742, true);
+addBookToShelf('Percy Jackson: The Lightning Thief and the thunder', 'Rick Riordan', 432, true);
+addBookToShelf('The Hobbit', 'J.R.R. Tolkien', 669, false);
+addBookToShelf('Thrawn', 'Timothy Zahn', 742, true);
+addBookToShelf('Percy Jackson: The Lightning Thief', 'Rick Riordan', 432, true);
+
 function displayBooks() {
     const bookContainer = document.querySelector('#book-container');
 
@@ -22,25 +29,44 @@ function displayBooks() {
         bookCard.classList.add('book-card');
         bookCard.id = `book${bookshelf.indexOf(book)}`;
 
-        const title = document.createElement('h4');
+        const bookInfo = document.createElement('div');
+        const title = document.createElement('h2');
         const author = document.createElement('p');
         const pageCount = document.createElement('p');
-        const readStatus = document.createElement('div');
 
+        const bookActions = document.createElement('div');
+        const readStatus = document.createElement('div');
+        const readStatusIcon = document.createElement('i');
+        const removeButton = document.createElement('div');
+        const removeButtonIcon = document.createElement('i');
+
+        bookInfo.classList.add('book-info');
         title.classList.add('title');
         author.classList.add('author');
         pageCount.classList.add('count');
-        readStatus.classList.add('status');
-        readStatus.classList.add(book.read ? 'read' : 'unread');
+
+        bookActions.classList.add('actions');
+        readStatus.classList.add('btn', 'status', book.read ? 'read' : 'unread');
+        readStatusIcon.classList.add(book.read ? 'fas' : 'far', 'fa-star');
+        removeButton.classList.add('btn', 'remove');
+        removeButtonIcon.classList.add('far', 'fa-trash-alt');
 
         title.textContent = book.title;
-        author.textContent = book.author;
-        pageCount.textContent = book.pages;
+        author.textContent = `by ${book.author}`;
+        pageCount.textContent = `${book.pages} pages`;
 
-        bookCard.appendChild(title);
-        bookCard.appendChild(author);
-        bookCard.appendChild(pageCount);
-        bookCard.appendChild(readStatus);
+        bookInfo.appendChild(title);
+        bookInfo.appendChild(author);
+        bookInfo.appendChild(pageCount);
+
+        removeButton.appendChild(removeButtonIcon);
+        readStatus.appendChild(readStatusIcon);
+
+        bookActions.appendChild(removeButton);
+        bookActions.appendChild(readStatus);
+
+        bookCard.appendChild(bookInfo);
+        bookCard.appendChild(bookActions);
 
         bookContainer.appendChild(bookCard);
     });
