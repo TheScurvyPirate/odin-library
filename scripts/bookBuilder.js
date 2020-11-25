@@ -41,6 +41,21 @@ function displayBooks() {
         const removeButtonIcon = document.createElement('i');
 
         removeButton.addEventListener('click', removeBook);
+        readStatus.addEventListener('click', (e) => {
+            if(e.target.tagName == 'DIV') {
+                e.target.classList.toggle('read');
+                e.target.classList.toggle('unread');
+
+                e.target.firstChild.classList.toggle('fas');
+                e.target.firstChild.classList.toggle('far');
+            } else {
+                e.target.parentElement.classList.toggle('read');
+                e.target.parentElement.classList.toggle('unread');
+
+                e.target.classList.toggle('fas');
+                e.target.classList.toggle('far');
+            }
+        });
 
         bookInfo.classList.add('book-info');
         title.classList.add('title');
