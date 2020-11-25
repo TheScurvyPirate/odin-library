@@ -40,6 +40,8 @@ function displayBooks() {
         const removeButton = document.createElement('div');
         const removeButtonIcon = document.createElement('i');
 
+        removeButton.addEventListener('click', removeBook);
+
         bookInfo.classList.add('book-info');
         title.classList.add('title');
         author.classList.add('author');
@@ -70,6 +72,16 @@ function displayBooks() {
 
         bookContainer.appendChild(bookCard);
     });
+}
+
+function removeBook(e) {
+    const bookDiv = document.querySelector('#book-container');
+
+    if(e.target.tagName == 'DIV') {
+        bookDiv.removeChild(e.target.parentElement.parentElement);
+    } else {
+        bookDiv.removeChild(e.target.parentElement.parentElement.parentElement);
+    }
 }
 
 window.onload = displayBooks;
