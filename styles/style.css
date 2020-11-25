@@ -1,6 +1,8 @@
 :root {
-    --bg-dark: #1f2029;
     --fg-dark: #dcdcdc;
+    --fg-darker: #5a5b61;
+
+    --bg-dark: #1f2029;
     --bg-dark-1: #2f3039;
     --bg-dark-2: #3f4049;
 
@@ -80,8 +82,7 @@ body {
 }
 
 .remove {
-    color: gainsboro;
-    opacity: 0.25;
+    color: var(--fg-darker);
     transition: 0.25s linear all;
 }
 
@@ -95,12 +96,30 @@ body {
 }
 
 .unread {
-    color: gainsboro;
-    opacity: 0.25;
+    color: var(--fg-darker);
     transition: 0.25s linear all;
 }
 
 .unread:hover {
-    color: rgb(70, 175, 70);
-    opacity: 1;
+    color: rgb(226, 204, 80);
+}
+
+#new-book {
+    position: fixed;
+    color: var(--fg-darker);
+    background-color: var(--bg-dark-2);
+    border-radius: 50%;
+    width: 64px;
+    height: 64px;
+    font-size: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 20px;
+    right: 20px;
+    transition: 0.25s linear all;
+}
+
+#new-book:hover {
+    color: #45aeee;
 }
