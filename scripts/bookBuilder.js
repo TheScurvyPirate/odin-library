@@ -101,4 +101,37 @@ function toggleReadStatus(e) {
     }
 }
 
+function resetFormInputs() {
+    const title = document.querySelector('#book-title');
+    const author = document.querySelector('#book-author');
+    const pages = document.querySelector('#book-pages');
+    const bookRead = document.querySelector('#read-status');
+
+    title.value = '';
+    author.value = '';
+    pages.value = '';
+    bookRead.checked = false;
+}
+
+function submitBookForm() {
+    const title = document.querySelector('#book-title').value;
+    const author = document.querySelector('#book-author').value;
+    const pages = document.querySelector('#book-pages').value;
+    const bookRead = document.querySelector('#read-status').checked;
+
+    const form = document.querySelector('#add-book-form');
+
+    form.classList.toggle('hide');
+    resetFormInputs();
+    addBookToShelf(title, author, pages, bookRead);
+}
+
+function showBookForm() {
+    const form = document.querySelector('#add-book-form');
+
+    form.classList.toggle('hide');
+}
+
+document.querySelector('#add-book').addEventListener('click', submitBookForm);
+document.querySelector('#new-book').addEventListener('click', showBookForm);
 window.onload = displayBooks;
