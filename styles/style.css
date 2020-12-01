@@ -15,6 +15,8 @@
 
 * {
     margin: 0;
+    font-family: "Jost";
+    font-weight: 400;
 }
 
 body {
@@ -48,6 +50,7 @@ body {
 
 .title {
     margin-bottom: 4px;
+    font-weight: 500;
 }
 
 .book-info {
@@ -122,4 +125,130 @@ body {
 
 #new-book:hover {
     color: #45aeee;
+}
+
+.book-form {
+    position: absolute;
+    top: 20%;
+    left: 35%;
+    height: 60%;
+    width: 30%;
+    background-color: var(--bg-dark-2);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.hide {
+    display: none;
+}
+
+.checkbox {
+    display: block;
+    position: relative;
+    padding-left: 40px;
+    cursor: pointer;
+    font-size: 32px;
+    user-select: none;
+}
+
+input[type="checkbox"] {
+    display: none;
+    cursor: pointer;
+}
+
+input[type="text"], input[type="number"] {
+    height: 48px;
+    font-size: 24px;
+    box-sizing: border-box;
+    border: 2px solid #aaa;
+    border-radius: 3px;
+    padding: 0px 8px;
+}
+
+input::placeholder, input::-moz-placeholder, input::-webkit-input-placeholder {
+    font-size: 24px;
+    color: #aaa;
+    font-weight: 300;
+}
+
+input[type="text"]:focus, input[type="number"]:focus {
+    border-color: #45aeee;
+}
+
+button {
+    margin: 0 16px;
+    font-size: 24px;
+    border: none;
+    height: 48px;
+    border-radius: 3px;
+    transition: 0.4s all;
+    color: var(--bg-dark-2);
+}
+
+button:hover {
+    background-color: #45aeee;
+    color: gainsboro;
+}
+
+.checkmark {
+    position: absolute;
+    top: 7px;
+    left: 0;
+    height: 32px;
+    width: 32px;
+    background-color: gainsboro;
+    border-radius: 3px;
+}
+
+.checkbox:hover input ~ .checkmark {
+    background-color: gainsboro;
+}
+
+.checkbox input:checked ~ .checkmark {
+    background-color: #45aeee;
+}
+
+.checkmark:after {
+    content: '';
+    position: absolute;
+    display: none;
+}
+
+.checkbox input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.checkbox .checkmark:after {
+    left: 11px;
+    top: 6px;
+    width: 7px;
+    height: 14px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.accessibly-hidden {
+    position: absolute !important;
+    left: -9999px !important;
+    top: -9999px !important;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    margin: 0 16px;
+}
+
+#form-heading {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 500;
 }
