@@ -20,59 +20,57 @@ addBookToShelf('The Hobbit', 'J.R.R. Tolkien', 669, false);
 addBookToShelf('Thrawn', 'Timothy Zahn', 742, true);
 addBookToShelf('Percy Jackson: The Lightning Thief', 'Rick Riordan', 432, true);
 
-function displayBooks() {
+function displayBook(book) {
     const bookContainer = document.querySelector('#book-container');
 
-    bookshelf.forEach(book => {
-        const bookCard = document.createElement('div');
+    const bookCard = document.createElement('div');
 
-        bookCard.classList.add('book-card');
-        bookCard.id = `book${bookshelf.indexOf(book)}`;
+    bookCard.classList.add('book-card');
+    bookCard.id = `book${bookshelf.indexOf(book)}`;
 
-        const bookInfo = document.createElement('div');
-        const title = document.createElement('h2');
-        const author = document.createElement('p');
-        const pageCount = document.createElement('p');
+    const bookInfo = document.createElement('div');
+    const title = document.createElement('h2');
+    const author = document.createElement('p');
+    const pageCount = document.createElement('p');
 
-        const bookActions = document.createElement('div');
-        const readStatus = document.createElement('div');
-        const readStatusIcon = document.createElement('i');
-        const removeButton = document.createElement('div');
-        const removeButtonIcon = document.createElement('i');
+    const bookActions = document.createElement('div');
+    const readStatus = document.createElement('div');
+    const readStatusIcon = document.createElement('i');
+    const removeButton = document.createElement('div');
+    const removeButtonIcon = document.createElement('i');
 
-        removeButton.addEventListener('click', removeBook);
-        readStatus.addEventListener('click', toggleReadStatus);
+    removeButton.addEventListener('click', removeBook);
+    readStatus.addEventListener('click', toggleReadStatus);
 
-        bookInfo.classList.add('book-info');
-        title.classList.add('title');
-        author.classList.add('author');
-        pageCount.classList.add('count');
+    bookInfo.classList.add('book-info');
+    title.classList.add('title');
+    author.classList.add('author');
+    pageCount.classList.add('count');
 
-        bookActions.classList.add('actions');
-        readStatus.classList.add('btn', 'status', book.read ? 'read' : 'unread');
-        readStatusIcon.classList.add(book.read ? 'fas' : 'far', 'fa-star');
-        removeButton.classList.add('btn', 'remove');
-        removeButtonIcon.classList.add('far', 'fa-trash-alt');
+    bookActions.classList.add('actions');
+    readStatus.classList.add('btn', 'status', book.read ? 'read' : 'unread');
+    readStatusIcon.classList.add(book.read ? 'fas' : 'far', 'fa-star');
+    removeButton.classList.add('btn', 'remove');
+    removeButtonIcon.classList.add('far', 'fa-trash-alt');
 
-        title.textContent = book.title;
-        author.textContent = `by ${book.author}`;
-        pageCount.textContent = `${book.pages} pages`;
+    title.textContent = book.title;
+    author.textContent = `by ${book.author}`;
+    pageCount.textContent = `${book.pages} pages`;
 
-        bookInfo.appendChild(title);
-        bookInfo.appendChild(author);
-        bookInfo.appendChild(pageCount);
+    bookInfo.appendChild(title);
+    bookInfo.appendChild(author);
+    bookInfo.appendChild(pageCount);
 
-        removeButton.appendChild(removeButtonIcon);
-        readStatus.appendChild(readStatusIcon);
+    removeButton.appendChild(removeButtonIcon);
+    readStatus.appendChild(readStatusIcon);
 
-        bookActions.appendChild(removeButton);
-        bookActions.appendChild(readStatus);
+    bookActions.appendChild(removeButton);
+    bookActions.appendChild(readStatus);
 
-        bookCard.appendChild(bookInfo);
-        bookCard.appendChild(bookActions);
+    bookCard.appendChild(bookInfo);
+    bookCard.appendChild(bookActions);
 
-        bookContainer.appendChild(bookCard);
-    });
+    bookContainer.appendChild(bookCard);
 }
 
 function removeBook(e) {
@@ -134,4 +132,4 @@ function showBookForm() {
 
 document.querySelector('#add-book').addEventListener('click', submitBookForm);
 document.querySelector('#new-book').addEventListener('click', showBookForm);
-window.onload = displayBooks;
+window.onload = bookshelf.forEach(book => displayBook(book));
