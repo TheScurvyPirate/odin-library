@@ -1,11 +1,13 @@
 /* eslint-env browser */
 const bookshelf = [];
+let currentID = 0;
 
 function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read = read;
+    this.id = currentID++;
     this.info = () => read ? `${title} by ${author}, ${pages} pages, read` : `${title} by ${author}, ${pages} pages, not yet read`;
 }
 
@@ -26,7 +28,7 @@ function displayBook(book) {
     const bookCard = document.createElement('div');
 
     bookCard.classList.add('book-card');
-    bookCard.id = `book${bookshelf.indexOf(book)}`;
+    bookCard.id = `book${book.id}`;
 
     const bookInfo = document.createElement('div');
     const title = document.createElement('h2');
