@@ -1,26 +1,27 @@
 /* eslint-env browser */
-const bookshelf = [];
-let currentID = 0;
+const localStorage = window.localStorage;
+const savedBooks = JSON.parse(localStorage.getItem('bookshelf'));
 
-function Book(title, author, pages, read) {
+function Book(title, author, pages, read, id) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read = read;
-    this.id = currentID++;
+    this.id = id;
     this.info = () => read ? `${title} by ${author}, ${pages} pages, read` : `${title} by ${author}, ${pages} pages, not yet read`;
 }
 
 function addBookToShelf(title, author, pages, read) {
-    bookshelf.push(new Book(title, author, pages, read));
-}
+    const nextId = +localStorage.getItem('nextId') || 0;
+    const newBook = new Book(title, author, pages, read, nextId);
+    const bookshelf = JSON.parse(localStorage.getItem('bookshelf')) || [];
 
-addBookToShelf('The Hobbit', 'J.R.R. Tolkien', 669, false);
-addBookToShelf('Thrawn', 'Timothy Zahn', 742, true);
-addBookToShelf('Percy Jackson: The Lightning Thief and the thunder', 'Rick Riordan', 432, true);
-addBookToShelf('The Hobbit', 'J.R.R. Tolkien', 669, false);
-addBookToShelf('Thrawn', 'Timothy Zahn', 742, true);
-addBookToShelf('Percy Jackson: The Lightning Thief', 'Rick Riordan', 432, true);
+    bookshelf.push(newBook);
+    localStorage.setItem('bookshelf', JSON.stringify(bookshelf));
+    localStorage.setItem('nextId', nextId + 1);
+
+    displayBook(newBook);
+}
 
 function displayBook(book) {
     const bookContainer = document.querySelector('#book-container');
@@ -77,12 +78,12 @@ function displayBook(book) {
 
 function removeBook(e) {
     const bookDiv = document.querySelector('#book-container');
+    const bookshelf = JSON.parse(localStorage.getItem('bookshelf'));
+    const bookToRemove = e.target.tagName == 'DIV' ? e.target.parentElement.parentElement : e.target.parentElement.parentElement.parentElement;
+    const indexOfBookToRemove = bookshelf.findIndex(book => book.id == bookToRemove.id.slice(4));
 
-    if(e.target.tagName == 'DIV') {
-        bookDiv.removeChild(e.target.parentElement.parentElement);
-    } else {
-        bookDiv.removeChild(e.target.parentElement.parentElement.parentElement);
-    }
+    localStorage.setItem('bookshelf', JSON.stringify([...bookshelf.slice(0, indexOfBookToRemove), ...bookshelf.slice(indexOfBookToRemove + 1)]));
+    bookDiv.removeChild(bookToRemove);
 }
 
 function toggleReadStatus(e) {
@@ -134,4 +135,4 @@ function showBookForm() {
 
 document.querySelector('#add-book').addEventListener('click', submitBookForm);
 document.querySelector('#new-book').addEventListener('click', showBookForm);
-window.onload = bookshelf.forEach(book => displayBook(book));
+window.onload = savedBooks.forEach(book => displayBook(book));
